@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE BOSS FOUNDATION</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a; /* Dark Grey */
+            color: #f0f0f0; /* Light Grey for text */
+        }
+        .header-bg {
+            background-color: #000; /* Black */
+        }
+        .gold-text {
+            color: #FFD700; /* Gold Yellow */
+        }
+        .dark-grey-bg {
+            background-color: #2a2a2a; /* Darker Grey */
+        }
+        .btn-gold {
+            background-color: #FFD700; /* Gold Yellow */
+            color: #000; /* Black text on gold */
+            transition: background-color 0.3s ease;
+        }
+        .btn-gold:hover {
+            background-color: #e6c200; /* Slightly darker gold on hover */
+        }
+        .card-bg {
+            background-color: #2a2a2a; /* Darker Grey for cards */
+        }
+        .input-field {
+            background-color: #3a3a3a; /* Even darker grey for input fields */
+            color: #f0f0f0;
+            border: 1px solid #555;
+        }
+        /* Custom scrollbar for a sleek look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #777;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="header-bg shadow-lg py-4 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between rounded-b-lg">
+        <div class="flex items-center mb-4 md:mb-0">
+            <!-- NGO Logo -->
+            <img src="images/logo.webp" alt="THE BOSS FOUNDATION Logo" class="w-20 h-20 md:w-24 md:h-24 rounded-full mr-4 object-cover">
+            <div>
+                <h1 class="text-3xl md:text-5xl font-bold gold-text leading-tight">THE BOSS FOUNDATION</h1>
+                <p class="text-sm md:text-lg text-gray-400 mt-1">100% Transparent NGO | Kodambakkam, Chennai</p>
+            </div>
+        </div>
+        <!-- Instagram Link -->
+        <div class="mt-4 md:mt-0">
+            <a href="https://www.instagram.com/thebossfdn" target="_blank" class="text-gray-400 hover:text-gold-text transition duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram mr-2">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                </svg>
+                <span class="text-lg">@thebossfdn</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-8 px-4 md:px-8">
+
+        <!-- Support a Cause Section -->
+        <section class="my-12 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold gold-text mb-8">Support a Cause <span class="text-orange-500">🧡</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Donation Option 1 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg flex flex-col items-center transform hover:scale-105 transition duration-300">
+                     <img src="images/opt1.jpg" alt="Photo Proof + Free Birthday Wish" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/300x200/4a4a4a/f0f0f0?text=Option+1';">
+                    <h3 class="text-2xl font-semibold gold-text mb-2">₹40</h3>
+                    <p class="text-gray-300 text-center">Photo Proof + Free Birthday Wish</p>
+                </div>
+                <!-- Donation Option 2 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg flex flex-col items-center transform hover:scale-105 transition duration-300">
+                    <img src="images/opt2.jpg" alt="Casual Birthday Wish" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/300x200/4a4a4a/f0f0f0?text=Option+2';">
+                    <h3 class="text-2xl font-semibold gold-text mb-2">₹800</h3>
+                    <p class="text-gray-300 text-center">Casual Birthday Wish</p>
+                </div>
+                <!-- Donation Option 3 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg flex flex-col items-center transform hover:scale-105 transition duration-300">
+                    <img src="images/opt3.webp" alt="Donate Meal" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/300x200/4a4a4a/f0f0f0?text=Option+3';">
+                    <h3 class="text-2xl font-semibold gold-text mb-2">₹60 or ₹35/meal</h3>
+                    <p class="text-gray-300 text-center">Donate Meal</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation Form Section -->
+        <section class="my-12 dark-grey-bg p-8 rounded-lg shadow-xl max-w-2xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold gold-text mb-6 text-center">Make a Donation</h2>
+            <form id="donationForm" class="space-y-6">
+                <div>
+                    <label for="fullName" class="block text-gray-300 text-lg font-medium mb-2">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" class="input-field w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-text" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-300 text-lg font-medium mb-2">Email Address</label>
+                    <input type="email" id="email" name="email" class="input-field w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-text" required>
+                </div>
+                <div>
+                    <label for="whatsappNumber" class="block text-gray-300 text-lg font-medium mb-2">WhatsApp Number</label>
+                    <input type="tel" id="whatsappNumber" name="whatsappNumber" class="input-field w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-text" pattern="[0-9]{10}" placeholder="e.g., 9150059199" required>
+                </div>
+                <div>
+                    <label for="donationOption" class="block text-gray-300 text-lg font-medium mb-2">Select Donation Option</label>
+                    <select id="donationOption" name="donationOption" class="input-field w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-text" required>
+                        <option value="">-- Select an option --</option>
+                        <option value="₹40 - Photo Proof + Free Birthday Wish">₹40 - Photo Proof + Free Birthday Wish</option>
+                        <option value="₹800 - Casual Birthday Wish">₹800 - Casual Birthday Wish</option>
+                        <option value="₹60 - Donate Meal (single)">₹60 - Donate Meal (single)</option>
+                        <option value="₹35 - Donate Meal (per meal)">₹35 - Donate Meal (per meal)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-gold w-full p-3 rounded-md text-xl font-semibold hover:shadow-lg">Order Now via WhatsApp</button>
+            </form>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="my-12 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold gold-text mb-8">What People Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg">
+                    <p class="text-gray-300 italic mb-4">"The transparency and dedication of THE BOSS FOUNDATION are truly inspiring. Proud to support their noble cause!"</p>
+                    <p class="font-semibold gold-text">- A Satisfied Donor</p>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg">
+                    <p class="text-gray-300 italic mb-4">"Their work in the community is making a real difference. It's heartwarming to see their impact firsthand."</p>
+                    <p class="font-semibold gold-text">- Community Member</p>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg">
+                    <p class="text-gray-300 italic mb-4">"An incredibly well-managed NGO with a clear vision. Highly recommend supporting their initiatives."</p>
+                    <p class="font-semibold gold-text">- Philanthropist</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="header-bg py-6 px-4 md:px-8 text-center text-gray-400 text-sm rounded-t-lg">
+        <p>&copy; 2025 THE BOSS FOUNDATION. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('donationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const whatsappNumber = document.getElementById('whatsappNumber').value;
+            const donationOption = document.getElementById('donationOption').value;
+
+            // WhatsApp number for the NGO
+            const ngoWhatsappNumber = '9150059199'; // Provided WhatsApp number
+
+            // Construct the WhatsApp message
+            const message = `Hello THE BOSS FOUNDATION,\n\nI would like to make a donation.\n\nMy details are:\nName: ${fullName}\nEmail: ${email}\nWhatsApp: ${whatsappNumber}\n\nSelected Donation Option: ${donationOption}\n\nPlease guide me on the next steps for the donation.`;
+
+            // Encode the message for URL
+            const encodedMessage = encodeURIComponent(message);
+
+            // Construct the WhatsApp URL
+            const whatsappUrl = `https://wa.me/${ngoWhatsappNumber}?text=${encodedMessage}`;
+
+            // Redirect to WhatsApp
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
