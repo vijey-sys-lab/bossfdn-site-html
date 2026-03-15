@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE BOSS FOUNDATION — 100% Transparent NGO</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23000'/><text y='72' x='50' text-anchor='middle' font-size='60'>🧡</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --gold: #FFD700;
+            --gold-dim: #c9a800;
+            --gold-pale: rgba(255, 215, 0, 0.08);
+            --black: #0a0a0a;
+            --ink: #111111;
+            --surface: #161616;
+            --surface2: #1e1e1e;
+            --surface3: #252525;
+            --text: #e8e8e8;
+            --text-muted: #888;
+            --text-dim: #555;
+            --orange: #FF6B2B;
+            --radius: 2px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--black);
+            color: var(--text);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* ─── CUSTOM CURSOR ─── */
+        .cursor {
+            position: fixed;
+            width: 10px; height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease, opacity 0.3s;
+            mix-blend-mode: difference;
+        }
+        .cursor-ring {
+            position: fixed;
+            width: 38px; height: 38px;
+            border: 1.5px solid rgba(255,215,0,0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.4s cubic-bezier(.23,1,.32,1), width 0.3s, height 0.3s, opacity 0.3s;
+        }
+
+        /* ─── NOISE OVERLAY ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── HEADER ─── */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 0 48px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,215,0,0.1);
+        }
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .header-logo img {
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid var(--gold);
+        }
+        .logo-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+        }
+        .logo-tagline {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+        .header-nav a {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.25s;
+            position: relative;
+        }
+        .header-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        .header-nav a:hover { color: var(--gold); }
+        .header-nav a:hover::after { width: 100%; }
+        .ig-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gold-pale);
+            border: 1px solid rgba(255,215,0,0.2);
+            padding: 8px 16px;
+            border-radius: 60px;
+            color: var(--gold) !important;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.78rem !important;
+            letter-spacing: 0.06em !important;
+            transition: background 0.3s, border-color 0.3s !important;
+        }
+        .ig-link:hover {
+            background: rgba(255,215,0,0.15) !important;
+            border-color: rgba(255,215,0,0.5) !important;
+        }
+        .ig-link::after { display: none !important; }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 140px 48px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-grid-lines {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,215,0,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,215,0,0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+        }
+        .hero-glow {
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(255,215,0,0.07) 0%, transparent 70%);
+            top: 50%; left: 30%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .hero-eyebrow {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.2s;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            width: 40px; height: 1px;
+            background: var(--gold);
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 9vw, 8rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            max-width: 900px;
+            opacity: 0;
+            animation: fadeUp 0.9s ease forwards 0.4s;
+        }
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold);
+            display: block;
+        }
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 440px;
+            line-height: 1.75;
+            margin-top: 28px;
+            opacity: 0;
+            animation: fadeUp 0.9s ease forwards 0.6s;
+        }
+        .hero-cta-row {
+            margin-top: 48px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            opacity: 0;
+            animation: fadeUp 0.9s ease forwards 0.8s;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+            font-weight: 700;
+            font-size: 0.88rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 16px 36px;
+            border: none;
+            border-radius: 60px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: none;
+            transition: background 0.25s, transform 0.2s;
+        }
+        .btn-primary:hover {
+            background: #ffe033;
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--text-dim);
+            padding-bottom: 2px;
+            transition: color 0.25s, border-color 0.25s;
+        }
+        .btn-outline:hover { color: var(--gold); border-color: var(--gold); }
+        .hero-stat-row {
+            position: absolute;
+            bottom: 60px; right: 48px;
+            display: flex;
+            gap: 48px;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 1s;
+        }
+        .hero-stat { text-align: right; }
+        .hero-stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+        .hero-stat-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .hero-vertical-text {
+            position: absolute;
+            right: 48px; top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            transform-origin: center;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        /* ─── SECTION SHARED ─── */
+        section { padding: 100px 48px; position: relative; }
+        .section-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-label::before {
+            content: '';
+            width: 24px; height: 1px;
+            background: var(--gold);
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text);
+        }
+        .section-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        /* ─── DIVIDER ─── */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.15), transparent);
+        }
+
+        /* ─── CAUSES ─── */
+        #causes { background: var(--surface); }
+        .causes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 64px;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        .causes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+        .cause-card {
+            background: var(--surface2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(.23,1,.32,1);
+        }
+        .cause-card:hover { transform: translateY(-6px); }
+        .cause-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+            z-index: 1;
+        }
+        .cause-card-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(30%);
+            transition: filter 0.4s, transform 0.6s;
+        }
+        .cause-card:hover .cause-card-img {
+            filter: grayscale(0%);
+            transform: scale(1.04);
+        }
+        .cause-card-body {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 28px 28px 32px;
+            z-index: 2;
+        }
+        .cause-number {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .cause-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+        .cause-desc {
+            font-size: 0.88rem;
+            color: rgba(232,232,232,0.8);
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+        .cause-tag {
+            display: inline-block;
+            margin-top: 14px;
+            background: rgba(255,215,0,0.15);
+            color: var(--gold);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 60px;
+            border: 1px solid rgba(255,215,0,0.25);
+        }
+
+        /* ─── DONATION FORM ─── */
+        #donate { background: var(--black); }
+        .donate-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .donate-left { }
+        .donate-left p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-top: 24px;
+            font-size: 0.97rem;
+        }
+        .donate-left .steps {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+        }
+        .step-num {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--gold);
+            background: var(--gold-pale);
+            border: 1px solid rgba(255,215,0,0.2);
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            letter-spacing: 0.05em;
+        }
+        .step-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            padding-top: 6px;
+        }
+        .step-text strong { color: var(--text); }
+
+        .donate-form {
+            background: var(--surface);
+            border: 1px solid rgba(255,215,0,0.1);
+            border-radius: 4px;
+            padding: 44px;
+        }
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 32px;
+        }
+        .form-group { margin-bottom: 22px; }
+        .form-label {
+            display: block;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        .form-input,
+        .form-select {
+            width: 100%;
+            background: var(--surface3);
+            border: 1px solid rgba(255,255,255,0.07);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            padding: 13px 16px;
+            border-radius: var(--radius);
+            outline: none;
+            transition: border-color 0.25s, background 0.25s;
+            -webkit-appearance: none;
+        }
+        .form-input:focus, .form-select:focus {
+            border-color: rgba(255,215,0,0.5);
+            background: #2a2a2a;
+        }
+        .form-select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            cursor: pointer;
+        }
+        .form-select option { background: #2a2a2a; }
+        .btn-submit {
+            width: 100%;
+            background: var(--gold);
+            color: var(--black);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 16px;
+            border: none;
+            border-radius: 60px;
+            cursor: none;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+        }
+        .btn-submit:hover {
+            background: #ffe033;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(255,215,0,0.2);
+        }
+        .whatsapp-icon { width: 18px; height: 18px; }
+
+        /* ─── TESTIMONIALS ─── */
+        #testimonials { background: var(--surface); }
+        .testimonials-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .testimonial-card {
+            background: var(--surface2);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius);
+            padding: 36px;
+            position: relative;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .testimonial-card:hover {
+            border-color: rgba(255,215,0,0.2);
+            transform: translateY(-4px);
+        }
+        .quote-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            color: rgba(255,215,0,0.12);
+            line-height: 0.5;
+            margin-bottom: 16px;
+            font-style: italic;
+            display: block;
+        }
+        .testimonial-text {
+            font-size: 0.93rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-style: italic;
+        }
+        .testimonial-author {
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .author-avatar {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: var(--gold-pale);
+            border: 1px solid rgba(255,215,0,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+        .author-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .author-role {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        .stars {
+            margin-bottom: 16px;
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+        }
+
+        /* ─── TRANSPARENCY STRIP ─── */
+        .trust-strip {
+            background: var(--gold);
+            padding: 20px 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--black);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        .trust-dot {
+            width: 6px; height: 6px;
+            background: var(--black);
+            border-radius: 50%;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--ink);
+            border-top: 1px solid rgba(255,215,0,0.08);
+            padding: 60px 48px 40px;
+        }
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .footer-brand { max-width: 300px; }
+        .footer-brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .footer-brand-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        .footer-links-col h4 {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+        .footer-links-col a {
+            display: block;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color 0.25s;
+        }
+        .footer-links-col a:hover { color: var(--gold); }
+        .footer-bottom {
+            margin-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-copy {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+        }
+
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ─── SCROLLING TICKER ─── */
+        .ticker-wrap {
+            background: var(--surface2);
+            border-top: 1px solid rgba(255,215,0,0.08);
+            border-bottom: 1px solid rgba(255,215,0,0.08);
+            padding: 14px 0;
+            overflow: hidden;
+        }
+        .ticker-track {
+            display: flex;
+            width: max-content;
+            animation: ticker 30s linear infinite;
+        }
+        .ticker-item {
+            white-space: nowrap;
+            padding: 0 48px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .ticker-item span { color: var(--gold); }
+        @keyframes ticker {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            header { padding: 0 24px; }
+            .header-nav { gap: 20px; }
+            section { padding: 72px 24px; }
+            .hero { padding: 130px 24px 100px; }
+            .causes-grid { grid-template-columns: 1fr; gap: 4px; }
+            .donate-inner { grid-template-columns: 1fr; gap: 48px; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .hero-stat-row { position: static; margin-top: 60px; justify-content: flex-start; }
+            .hero-vertical-text { display: none; }
+            .donate-form { padding: 28px; }
+            footer { padding: 48px 24px 32px; }
+            .trust-strip { gap: 24px; padding: 20px 24px; }
+        }
+        @media (max-width: 600px) {
+            .header-nav a:not(.ig-link) { display: none; }
+            .causes-header, .testimonials-header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-logo">
+            <img src="images/logo.webp" alt="Logo"
+                 onerror="this.style.display='none'">
+            <div>
+                <div class="logo-name">THE BOSS FOUNDATION</div>
+                <div class="logo-tagline">Kodambakkam, Chennai</div>
+            </div>
+        </div>
+        <nav class="header-nav">
+            <a href="#causes">Causes</a>
+            <a href="#donate">Donate</a>
+            <a href="#testimonials">Stories</a>
+            <a href="https://www.instagram.com/thebossfdn" target="_blank" class="ig-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                @thebossfdn
+            </a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-grid-lines"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-eyebrow">100% Transparent &nbsp;·&nbsp; Est. 2024</div>
+        <h1 class="hero-title">
+            Giving with
+            <em>Purpose,</em>
+            not just Charity.
+        </h1>
+        <p class="hero-sub">
+            Every rupee is accounted for. Every meal served is photographed. Every life touched is shared. We believe transparency is the foundation of trust.
+        </p>
+        <div class="hero-cta-row">
+            <a href="https://forms.gle/fL63qxw4d9D2VGbt5" target="_blank" class="btn-primary">
+                Make a Donation
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#causes" class="btn-outline">
+                View Causes
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+        <div class="hero-stat-row">
+            <div class="hero-stat">
+                <div class="hero-stat-num">100%</div>
+                <div class="hero-stat-label">Transparent</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">₹35</div>
+                <div class="hero-stat-label">Per Meal</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">0</div>
+                <div class="hero-stat-label">Hidden Fees</div>
+            </div>
+        </div>
+        <div class="hero-vertical-text">Kodambakkam · Chennai · Since 2024</div>
+    </section>
+
+    <!-- Trust Ticker -->
+    <div class="ticker-wrap">
+        <div class="ticker-track">
+            <div class="ticker-item"><span>✦</span> Photo Proof for Every Donation</div>
+            <div class="ticker-item"><span>✦</span> 100% Transparent NGO</div>
+            <div class="ticker-item"><span>✦</span> Meals from ₹35</div>
+            <div class="ticker-item"><span>✦</span> WhatsApp Updates</div>
+            <div class="ticker-item"><span>✦</span> Zero Hidden Fees</div>
+            <div class="ticker-item"><span>✦</span> Kodambakkam, Chennai</div>
+            <div class="ticker-item"><span>✦</span> Birthday Wish Included</div>
+            <div class="ticker-item"><span>✦</span> Real Impact, Real People</div>
+            <!-- Duplicate for seamless loop -->
+            <div class="ticker-item"><span>✦</span> Photo Proof for Every Donation</div>
+            <div class="ticker-item"><span>✦</span> 100% Transparent NGO</div>
+            <div class="ticker-item"><span>✦</span> Meals from ₹35</div>
+            <div class="ticker-item"><span>✦</span> WhatsApp Updates</div>
+            <div class="ticker-item"><span>✦</span> Zero Hidden Fees</div>
+            <div class="ticker-item"><span>✦</span> Kodambakkam, Chennai</div>
+            <div class="ticker-item"><span>✦</span> Birthday Wish Included</div>
+            <div class="ticker-item"><span>✦</span> Real Impact, Real People</div>
+        </div>
+    </div>
+
+    <!-- Causes Section -->
+    <section id="causes">
+        <div class="causes-header reveal">
+            <div>
+                <div class="section-label">Support a Cause</div>
+                <h2 class="section-title">Choose how you<br>want to <em>give.</em></h2>
+            </div>
+            <p style="max-width:300px; color:var(--text-muted); font-size:0.9rem; line-height:1.7;">
+                From a single meal to a birthday surprise — every contribution creates a real, documented difference.
+            </p>
+        </div>
+        <div class="causes-grid reveal">
+            <div class="cause-card">
+                <img src="images/opt1.jpg" alt="Photo Proof + Birthday Wish" class="cause-card-img"
+                     onerror="this.src='https://placehold.co/600x320/1e1e1e/555555?text=Birthday+Wish'">
+                <div class="cause-card-body">
+                    <div class="cause-number">01 / BIRTHDAY</div>
+                    <div class="cause-price">₹40</div>
+                    <div class="cause-desc">Photo Proof + Free Birthday Wish delivered with care</div>
+                    <a href="https://forms.gle/fL63qxw4d9D2VGbt5" target="_blank" class="cause-tag">Donate Now →</a>
+                </div>
+            </div>
+            <div class="cause-card">
+                <img src="images/opt2.jpg" alt="Casual Birthday Wish" class="cause-card-img"
+                     onerror="this.src='https://placehold.co/600x320/1e1e1e/555555?text=Birthday+Wish'">
+                <div class="cause-card-body">
+                    <div class="cause-number">02 / CELEBRATION</div>
+                    <div class="cause-price">₹700</div>
+                    <div class="cause-desc">Casual Birthday Wish — make someone's day extraordinary</div>
+                    <a href="https://forms.gle/fL63qxw4d9D2VGbt5" target="_blank" class="cause-tag">Donate Now →</a>
+                </div>
+            </div>
+            <div class="cause-card">
+                <img src="images/opt3.webp" alt="Donate a Meal" class="cause-card-img"
+                     onerror="this.src='https://placehold.co/600x320/1e1e1e/555555?text=Donate+Meal'">
+                <div class="cause-card-body">
+                    <div class="cause-number">03 / MEALS</div>
+                    <div class="cause-price">₹35–₹60</div>
+                    <div class="cause-desc">Donate a meal — full or per-meal contributions, fully documented</div>
+                    <a href="https://forms.gle/fL63qxw4d9D2VGbt5" target="_blank" class="cause-tag">Donate Now →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Trust Strip -->
+    <div class="trust-strip">
+        <div class="trust-item"><div class="trust-dot"></div>Every donation photographed</div>
+        <div class="trust-item"><div class="trust-dot"></div>WhatsApp confirmation sent</div>
+        <div class="trust-item"><div class="trust-dot"></div>Zero admin fees</div>
+        <div class="trust-item"><div class="trust-dot"></div>No middlemen</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Donation Section -->
+    <section id="donate">
+        <div class="donate-inner">
+            <div class="donate-left reveal">
+                <div class="section-label">Make a Donation</div>
+                <h2 class="section-title">Your <em>rupee,</em><br>fully accounted.</h2>
+                <p>Click the button to open our donation form. Takes less than a minute — and every contribution is photographed and confirmed directly with you.</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">01</div>
+                        <div class="step-text"><strong>Click "Donate Now"</strong> to open the Google Form.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">02</div>
+                        <div class="step-text"><strong>Fill in your details</strong> and choose your preferred donation option.</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">03</div>
+                        <div class="step-text"><strong>Receive photo proof</strong> of your contribution after we deliver the cause.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="donate-form reveal reveal-delay-2" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:32px;">
+                <div>
+                    <div style="font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:16px;">Ready to give?</div>
+                    <div style="font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700; color:var(--text); line-height:1.2; margin-bottom:12px;">Every rupee<br><em style="color:var(--gold); font-style:italic;">makes a difference.</em></div>
+                    <p style="color:var(--text-muted); font-size:0.92rem; line-height:1.7; max-width:320px; margin:0 auto;">Our Google Form handles everything — your details, donation choice, and confirmation all in one place.</p>
+                </div>
+                <a href="https://forms.gle/fL63qxw4d9D2VGbt5" target="_blank" class="btn-primary" style="font-size:1rem; padding:18px 48px; border-radius:60px; text-decoration:none;">
+                    🧡 &nbsp;Donate Now
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <div style="display:flex; gap:32px; justify-content:center; flex-wrap:wrap;">
+                    <div style="text-align:center;">
+                        <div style="font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--gold); font-weight:700;">₹35</div>
+                        <div style="font-family:'DM Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin-top:4px;">Per Meal</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--gold); font-weight:700;">100%</div>
+                        <div style="font-family:'DM Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin-top:4px;">Transparent</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--gold); font-weight:700;">📸</div>
+                        <div style="font-family:'DM Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin-top:4px;">Photo Proof</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" style="background: var(--surface);">
+        <div class="testimonials-header reveal">
+            <div>
+                <div class="section-label">Community Stories</div>
+                <h2 class="section-title">What people<br>are <em>saying.</em></h2>
+            </div>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal reveal-delay-1">
+                <div class="stars">★★★★★</div>
+                <span class="quote-mark">"</span>
+                <p class="testimonial-text">The transparency and dedication of THE BOSS FOUNDATION are truly inspiring. Proud to support their noble cause — I received photo proof within the same day.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">A</div>
+                    <div>
+                        <div class="author-name">A Satisfied Donor</div>
+                        <div class="author-role">Repeat Contributor</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal reveal-delay-2">
+                <div class="stars">★★★★★</div>
+                <span class="quote-mark">"</span>
+                <p class="testimonial-text">Their work in the community is making a real difference. It's heartwarming to see their impact firsthand — and the WhatsApp updates keep me involved.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">C</div>
+                    <div>
+                        <div class="author-name">Community Member</div>
+                        <div class="author-role">Chennai Resident</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal reveal-delay-3">
+                <div class="stars">★★★★★</div>
+                <span class="quote-mark">"</span>
+                <p class="testimonial-text">An incredibly well-managed NGO with a clear vision. The photo proof and direct WhatsApp model builds trust like no other NGO I've supported.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">P</div>
+                    <div>
+                        <div class="author-name">Philanthropist</div>
+                        <div class="author-role">Regular Donor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-brand-name">THE BOSS FOUNDATION</div>
+                <div class="footer-brand-desc">A 100% transparent NGO based in Kodambakkam, Chennai. Every rupee is tracked. Every contribution is photographed. Every person matters.</div>
+            </div>
+            <div class="footer-links-col">
+                <h4>Navigate</h4>
+                <a href="#causes">Support a Cause</a>
+                <a href="#donate">Make a Donation</a>
+                <a href="#testimonials">Stories</a>
+            </div>
+            <div class="footer-links-col">
+                <h4>Connect</h4>
+                <a href="https://www.instagram.com/thebossfdn" target="_blank">Instagram</a>
+                <a href="https://wa.me/9150059199" target="_blank">WhatsApp</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2025 THE BOSS FOUNDATION — Kodambakkam, Chennai</div>
+            <div class="footer-copy">Designed with 🧡 for a transparent India</div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Custom Cursor ──
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursorRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            cursor.style.left = mx - 5 + 'px';
+            cursor.style.top = my - 5 + 'px';
+        });
+        function animRing() {
+            rx += (mx - rx) * 0.12;
+            ry += (my - ry) * 0.12;
+            ring.style.left = rx - 19 + 'px';
+            ring.style.top = ry - 19 + 'px';
+            requestAnimationFrame(animRing);
+        }
+        animRing();
+        document.querySelectorAll('a, button, .cause-card, .testimonial-card, input, select').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2)';
+                ring.style.width = '56px'; ring.style.height = '56px';
+                ring.style.borderColor = 'rgba(255,215,0,0.8)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                ring.style.width = '38px'; ring.style.height = '38px';
+                ring.style.borderColor = 'rgba(255,215,0,0.5)';
+            });
+        });
+
+        // ── Scroll Reveal ──
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(r => observer.observe(r));
+
+        // Donation handled by Google Form link
+
+        // ── Header scroll style ──
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 60) {
+                header.style.borderBottomColor = 'rgba(255,215,0,0.18)';
+            } else {
+                header.style.borderBottomColor = 'rgba(255,215,0,0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
